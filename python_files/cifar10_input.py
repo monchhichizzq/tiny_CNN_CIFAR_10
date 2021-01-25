@@ -1,7 +1,10 @@
+import os
 import pickle
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+
+data_path = '../dataset/data_download/cifar-10-python/cifar-10-batches-py'
 
 def unpickle(file):
     '''
@@ -18,7 +21,8 @@ def unpickle_cifar():
     cifar_train={}
     # Unite 5 training dataset
     for i in range(5):
-        cifar1=unpickle('../data_download/cifar-10-batches-py/data_batch_'+str(i+1))
+        print(os.getcwd())
+        cifar1=unpickle(os.path.join(data_path, 'data_batch_'+str(i+1)))
         if i==0:
             cifar_train[b'data']=cifar1[b'data']
             cifar_train[b'labels']=cifar1[b'labels']
@@ -26,13 +30,13 @@ def unpickle_cifar():
             cifar_train[b'data']=np.vstack([cifar1[b'data'],cifar_train[b'data']])
             cifar_train[b'labels']=np.hstack([cifar1[b'labels'],cifar_train[b'labels']])
     # batches.meta restore the label names
-    target_name = unpickle('../data_download/cifar-10-batches-py/batches.meta')
+    target_name = unpickle(os.path.join(data_path, 'batches.meta'))
     cifar_train[b'label_names'] = [str(x)[2:-1] for i, x in enumerate(target_name[b'label_names'])]
     print(cifar_train[b'label_names'] )
     cifar_train = get_images(cifar_train)
 
     # load testset
-    cifar_test=unpickle('../data_download/cifar-10-batches-py/test_batch')
+    cifar_test=unpickle(os.path.join(data_path, 'test_batch'))
     cifar_test[b'labels']=np.array(cifar_test[b'labels'])
     cifar_test = get_images(cifar_test)
     return cifar_train, cifar_test

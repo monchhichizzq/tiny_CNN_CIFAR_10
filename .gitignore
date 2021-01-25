@@ -1,0 +1,5 @@
+.idea
+data_download/
+model_save/
+output/
+__pycache__

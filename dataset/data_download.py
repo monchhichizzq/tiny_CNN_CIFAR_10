@@ -2,29 +2,29 @@
 # import copy
 import os
 from subprocess import call
-from tools import mkdir
 
 print("")
 
 # Downloading data
 print("Downloading...")
-if not os.path.exists("../data_download/cifar-10-python.tar.gz"):
+os.makedirs('data_download', exist_ok=True)
+if not os.path.exists("data_download/cifar-10-python.tar.gz"):
     call(
-        'wget -O "../data_download/cifar-10-python.tar.gz" "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"',
+        'wget -O "data_download/cifar-10-python.tar.gz" "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"',
         shell=True
     )
     print("Downloading done.\n")
 else:
     print("Dataset already downloaded. Did not download twice.\n")
-
+#
 # Extracting tar data
 print("Extracting...")
-extract_directory = os.path.abspath("../data_download/cifar-10-python")
+extract_directory = os.path.abspath("data_download/cifar-10-python")
 print(extract_directory)
 if not os.path.exists(extract_directory):
-    mkdir(extract_directory)
+    os.makedirs(extract_directory, exist_ok=True)
     call(
-    'tar zxvf "../data_download/cifar-10-python.tar.gz" -C "../data_download/cifar-10-python"',
+    'tar zxvf "data_download/cifar-10-python.tar.gz" -C "data_download/cifar-10-python"',
     shell=True
     )
     print("Extracting successfully done to {}.".format(extract_directory))
