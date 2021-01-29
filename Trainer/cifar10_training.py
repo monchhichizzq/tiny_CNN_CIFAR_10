@@ -192,7 +192,7 @@ if __name__ == '__main__':
     logger = logging.getLogger('Cifar 10 Training')
     # global logger
     logger.setLevel(logging.DEBUG)
-
+    #
     # policy = mixed_precision.Policy('mixed_float16')
     # mixed_precision.set_policy(policy)
     # logger.info('Compute dtype: {}'.format(policy.compute_dtype))
@@ -248,7 +248,7 @@ if __name__ == '__main__':
         validation_split=0.0)
 
     # Prepare iterator
-    model_name = 'resnetv1'
+    model_name = 'resnetv1SE'
     batch_size = 128
     learning_rate = 1e-3
     precision = 'fp32'
