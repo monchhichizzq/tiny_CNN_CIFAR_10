@@ -1,10 +1,9 @@
 import urllib.request
 import os
 import tarfile
-from tools import mkdir
 
 # Download
-mkdir('../data_download')
+os.makedirs('../data_download', exist_ok=True)
 url = 'https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz'
 filepath = '../data_download/cifar-10-python.tar.gz'
 if not os.path.isfile(filepath):
